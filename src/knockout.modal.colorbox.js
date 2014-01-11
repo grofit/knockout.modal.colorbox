@@ -2,12 +2,12 @@
 	var setupModal = function(element, contentSelector, options) {
 		var onOpeningProxy = function() {
 			$(contentSelector).show();
-			if(options.onOpening) { options.onOpening(); }
+			if(options.onOpening) { options.onOpening(element, options.data); }
 		};
 		
 		var onClosingProxy = function() {
 			$(contentSelector).hide();
-			if(options.onClosing) { options.onOpening(); }
+			if(options.onClosing) { options.onOpening(element, options.data); }
 		};
 		
 		var colorboxOptions = {
@@ -20,10 +20,15 @@
 		if(options.title) { colorboxOptions.title = options.title; };
 		if(options.width) { colorboxOptions.width = options.width; };
 		if(options.height) { colorboxOptions.height = options.height; };
-		if(options.onOpened) { colorboxOptions.onComplete = options.onOpened; };
-		if(options.onClosed) { colorboxOptions.onClosed = options.onClosed; };		
 		if(options.nativeOptions) { $.extend(colorboxOptions, options.nativeOptions); }
-		
+
+        if(options.onOpened) {
+            colorboxOptions.onComplete = function() { options.onOpened(element, options.data); };
+        };
+        if(options.onClosed) {
+            colorboxOptions.onClosed = function() { options.onClosed(element, options.data);  };
+        };
+
 		$(contentSelector).hide();
 		$(element).colorbox(colorboxOptions);			
 	};

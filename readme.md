@@ -32,7 +32,10 @@ The available options for this binding are:
  * **onOpened** - The callback for when the modal has finished opening
  * **onClosing** - The callback for when the modal has started closing
  * **onClosed** - The callback for when the modal has finished closing
+ * **data** - The data to be used for callbacks, to assist with foreach modals
  * **nativeOptions** - This is the collection of options which are colorbox specific, see the colorbox site for more information
 
+The callbacks `on*` will have 2 arguments, 1 being the element that is the trigger and latter being the `options.data` if it has been provided.
+ 
 Here is an example of what it does and how to use it.
 [View Example](https://rawgithub.com/grofit/knockout.modal.colorbox/master/example.html)
